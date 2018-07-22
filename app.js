@@ -12,7 +12,7 @@ const usersController   = require('./controllers/users');
 // const authController   = require('./controllers/auth');
 const indexController = require('./controllers/index');
 // const photosController = require('./controllers/photos');
-// const homeController = require('./controllers/home');
+const homeController = require('./controllers/home');
 
 // Set up middleware
 app.use(methodOverride('_method'));
@@ -23,7 +23,7 @@ app.use(methodOverride('_method'));
 app.use('/users', usersController);
 app.use('/index', indexController);
 // app.use('/photos', photosController);
-// app.use('/home', homeController);
+app.use('/home', homeController);
 
 app.get('/', (req, res) => {
   res.render('index.ejs');
