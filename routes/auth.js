@@ -36,6 +36,7 @@ router.post('/login', async (req,res, err)=>{
   res.send(req.body);
 });
 
+// Register Request
 router.post('/register', (req,res)=>{
   console.log('hitting the register post route');
   const password = req.body.password;
@@ -50,6 +51,17 @@ router.post('/register', (req,res)=>{
   //   res.redirect('/home/index')
   // })
   res.send(newUser);
+});
+
+// LogOut 
+router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      res.send('error destorying session');
+    } else {
+      res.redirect('/auth');
+    }
+  })
 })
 
 
