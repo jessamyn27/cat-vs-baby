@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-  
+
+const Photos = require('./photo');
+
 const userSchema = mongoose.Schema({
   userName = {type: String, required: true, unique: true},
   password = {type: String, required: true},
