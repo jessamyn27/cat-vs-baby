@@ -1,17 +1,50 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError   = require('http-errors');
+const express       = require('express');
+const path          = require('path');
+const cookieParser  = require('cookie-parser');
+const logger        = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const app           = express();
+// const bodyParser     = require('body-parser');
+const methodOverride = require('method-override');
 
-var app = express();
+const usersController   = require('./controllers/users');
+// const authController   = require('./controllers/auth');
+// const indexController = require('./controllers/index');
+// const photosController = require('./controllers/photos');
+// const homeController = require('./controllers/home');
+
+// Set up middleware
+app.use(methodOverride('_method'));
+// app.use(bodyParser.urlencoded({extended: false}));
+
+// set up controller routes
+// app.use('/auth', authController);
+app.use('/users', usersController);
+// app.use('/index', indexController);
+// app.use('/photos', photosController);
+// app.use('/home', homeController);
+
+app.get('/', (req, res) => {
+  res.render('index.ejs');
+});
+
+
+
+// require db
+require('./db/db');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// set Up our session
+// app.use(session({
+//   secret: 'this is a random secret string that you make up',
+//   resave: false, // only save when the session object has been modified
+//   saveUninitialized: false // useful for login sessions, we only want to to save when we modify
+//   // session
+// }));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -19,8 +52,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
