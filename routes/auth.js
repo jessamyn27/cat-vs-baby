@@ -5,12 +5,12 @@ const bcrypt = require('bcrypt');
 
 // Login page 
 router.get('/login', (req,res)=>{
-  res.send('Login page')
+  res.render('auth/login.ejs')
 });
 
 // Register Page
 router.get('/register', (req,res)=>{
-  res.send('Reg page')
+  res.render('auth/register.ejs')
 })
 
 // Login Request 
