@@ -10,7 +10,7 @@ const methodOverride = require('method-override');
 
 const usersController   = require('./controllers/users');
 // const authController   = require('./controllers/auth');
-// const indexController = require('./controllers/index');
+const indexController = require('./controllers/index');
 // const photosController = require('./controllers/photos');
 // const homeController = require('./controllers/home');
 
@@ -21,15 +21,13 @@ app.use(methodOverride('_method'));
 // set up controller routes
 // app.use('/auth', authController);
 app.use('/users', usersController);
-// app.use('/index', indexController);
+app.use('/index', indexController);
 // app.use('/photos', photosController);
 // app.use('/home', homeController);
 
 app.get('/', (req, res) => {
   res.render('index.ejs');
 });
-
-
 
 // require db
 require('./db/db');
@@ -51,9 +49,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
