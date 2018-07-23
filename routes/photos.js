@@ -17,8 +17,16 @@ router.get('/babies/showall', async(req,res,err)=>{
   res.render('photos/allBabies.ejs')
 });
 
-router.get('/cats/showall', (req,res)=>{
-  res.send('show all cats routes')
+router.get('/cats/showall', async (req,res,err)=>{
+  // try {
+  //   const allCats = await Photos.find({catPhotos: {$exists: true}});
+  //   res.render('/photos/allCats.ejs', {
+  //     catPhotos: allCats
+  //   })
+  // } catch (err){
+  //   res.send(err);
+  // }
+  res.render('photos/allCats.ejs');
 });
 
 router.post('/', (req,res)=>{
